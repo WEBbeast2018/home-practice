@@ -1,10 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Calculator</title>
+    <style>
+        body {
+            background-color: #232323;
+        }
+        
+        h4 {
+            font-size: 14px;
+            text-align: center;
+            color: #000;
+            margin-top: 5px;
+            opacity: .5;
+            text-transform: uppercase;
+            font-family: cursive;
+        }
+        
+        .calculator {
+            margin: 50px auto;
+            width: 350px;
+            height: 550px;
+            padding: 10px;
+            border-radius: 50px;
+            background: rgba(230, 220, 210);
+            box-shadow: 0px -100px 500px 80px rgba(255, 255, 255, 0.2), 0px -130px 800px 30px rgba(255, 140, 30, 0.1), inset 0px -11px 30px rgba(55, 45, 35, 0.6), inset 0px -7px 8px rgba(55, 45, 35, 0.7), inset 0px -1px 1px rgba(255, 255, 255, 0.4), inset 0px 20px 3px rgba(255, 255, 255, 0.2), 0px 17px 27px rgba(0, 0, 0, 0.7), 0px 4px 3px rgba(0, 0, 0, 0.8), -2px -2px 2px rgba(0, 0, 0, 0.5), inset 1px 1px 1px rgba(255, 255, 255, 0.5), inset 0px 2px 2px rgba(0, 0, 0, 0.2), inset 1px 0px 2px rgba(0, 0, 0, 0.4), inset -1px 0px 2px rgba(0, 0, 0, 0.4);
+        }
+        
+        input[type="text"] {
+            display: block;
+            margin: 20px auto;
+            text-align: right;
+            padding-right: 30px;
+            outline: none;
+            width: 250px;
+            height: 80px;
+            font-size: 25px;
+            font-weight: bold;
+            background: rgba(206, 206, 182, 0.7);
+            border: 2px solid rgba(255, 255, 255, 0.7);
+            border-radius: 50px;
+            box-shadow: inset 0px -3px 10px rgba(0, 0, 0, 0.05), inset 1px 3px 9px rgba(0, 0, 0, 0.3), inset 1px 1px 1px rgba(0, 0, 0, 0.2), inset -1px -1px 1px rgba(0, 0, 0, 0.1), inset 0px 2px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        div.buttons {
+            margin: 20px 20px 0px 40px;
+        }
+        
+        input[type="button"] {
+            outline: none;
+            font-size: 22px;
+            width: 50px;
+            height: 50px;
+            color: #000000;
+            margin: 5px;
+            border: 1px solid;
+            border-radius: 15px;
+            color: rgba(0, 0, 0, 0.7);
+            box-shadow: inset 0px -2px 3px 3px rgba(80, 50, 40, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.8), inset 0px -1px 1px rgba(255, 255, 255, 0.5), inset 0px -2px 2px rgba(70, 50, 40, 0.8), inset 0px -7px 2px rgba(90, 50, 40, 0.3), 0px 0px 6px 2px rgba(150, 130, 100, 1), 0px 0px 0px 5px rgba(255, 255, 255, 0.5), 0px 0px 6px 6px rgba(0, 0, 0, 0.1), 0px 2px 3px rgba(150, 130, 100, 0.8), 0px 4px 1px 1px rgba(255, 255, 255, 0.7);
+        }
+        
+        input[type="button"]:active {
+            box-shadow: inset 0px -2px 3px 3px rgba(80, 50, 40, 0.2), 0px -1px 2px rgba(0, 0, 0, 0.8), inset 0px -1px 1px rgba(255, 255, 255, 0.5), inset 0px -2px 2px rgba(70, 50, 40, 0.8), inset 0px -7px 2px rgba(90, 50, 40, 0.3), 0px -3px 6px 2px rgba(150, 130, 100, 1), 0px -3px 0px 5px rgba(255, 255, 255, 0.5), 0px -3px 6px 6px rgba(0, 0, 0, 0.1), 0px -1px 3px rgba(150, 130, 100, 0.8), 0px 1px 1px 1px rgba(255, 255, 255, 0.7);
+        }
+        
+        input[type="button"]:hover {
+            color: rgba(255, 255, 255, 0.2);
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.2), 0px 0 0 #000, 0px 1px 1px rgba(255, 255, 255, 0.2);
+        }
+        
+        #btnC {
+            background-color: #4BB543;
+        }
+        
+        #btnPlus,
+        #btnMinus,
+        #btnMultipe,
+        #btnDivide,
+        #btnEqual {
+            background-color: #5bc0de;
+        }
+    </style>
 </head>
-<body>
 
+<body>
+    <form name="form">
+        <div class="calculator">
+            <h4>calculator</h4>
+            <input name="input" id="input" class="input" type="text" disabled="disabled" placeholder="0">
+
+            <div class="buttons">
+                <input type="button" name="btnC" id="btnC" value="C" onClick="clearInput()">
+            </div>
+
+            <div class="buttons">
+                <input type="button" name="btn7" id="btn7" value="7" onClick="getValueBtn(btn7.value)">
+                 <input type="button" name="btn8" id="btn8" value="8" onClick="getValueBtn(btn8.value)">
+                <input type="button" name="btn9" id="btn9" value="9" onClick="getValueBtn(btn9.value)">
+                <input type="button" name="btnPlus" id="btnPlus" value="+" onClick="getValueBtn(btnPlus.value)">
+            </div>
+
+            <div class="buttons">
+                <input type="button" name="btn4" id="btn4" value="4" onClick="getValueBtn(btn4.value)">
+                <input type="button" name="btn5" id="btn5" value="5" onClick="getValueBtn(btn5.value)">
+                <input type="button" name="btn6" id="btn6" value="6" onClick="getValueBtn(btn6.value)">
+                <input type="button" name="btnMinus" id="btnMinus" value="-" onClick="getValueBtn(btnMinus.value)">
+            </div>
+
+            <div class="buttons">
+                <input type="button" name="btn1" id="btn1" value="1" onClick="getValueBtn(btn1.value)">
+                <input type="button" name="btn2" id="btn2" value="2" onClick="getValueBtn(btn2.value)">
+                <input type="button" name="btn3" id="btn3" value="3" onClick="getValueBtn(btn3.value)">
+                <input type="button" name="btnMultipe" id="btnMultipe" value="&times;" onClick="getValueBtn('*')">
+            </div>
+
+            <div class="buttons">
+                <input type="button" name="btnPoint" id="btnPoint" value="." onClick="getValueBtn(btnPoint.value)">
+                <input type="button" name="btn0" id="btn0" value="0" onClick="getValueBtn(btn0.value)">
+                <input type="button" name="btnEqual" id="btnEqual" value="=" onClick="getTotal()">
+                <input type="button" name="btnDivide" id="btnDivide" value="&divide;" onClick="getValueBtn('/')">
+            </div>
+        </div>
+    </form>
+
+    <script>
+        //global variable
+         let operator;
+
+         function clearInput() {
+            form.input.value = "";
+         }
+
+
+        function getValueBtn(val) {
+            //got a number
+            if (!isNaN(val) || val === '.') {
+                form.input.value += val;
+            }
+            else {
+                switch (val) {
+                        case '-':
+                            operator = "-";
+                            form.input.value += val;
+                            break;
+                        case '+':
+                            operator = "+";
+                            form.input.value += val;
+                            break;
+                        case '/':
+                             operator = "/";
+                             form.input.value += val;
+                             break;
+                        case '*':
+                             operator = "*";
+                             form.input.value += val;
+                             break;
+                 }
+            }
+         }
+
+
+        function getTotal() {
+            let splited = form.input.value.split(operator);
+            switch (operator) {
+                case '-':
+                    form.input.value = parseFloat(splited[0]) - parseFloat(splited[1]);
+                    break;
+                case '+':
+                    form.input.value = parseFloat(splited[0]) + parseFloat(splited[1]);
+                    break;
+                case '/':
+                    form.input.value = parseFloat(splited[0]) / parseFloat(splited[1]);
+                    break;
+                case '*':
+                    form.input.value = parseFloat(splited[0]) * parseFloat(splited[1]);
+                    break;
+             }
+      }
+
+
+
+/*
+
+function getTotal(){
+    let total;
+    let input = form.input.value; //get input from the screen
+    let regExSigns = /[^\d.]/g; 
+    let arr = input.split(''); //split by an empty string
+    let operators = input.match(regExSigns); 
+    let numbers = input.split(operators);
+
+    for(i=0; i< arr.length;i++){
+        
+    }
+}
+  */
+    </script>
 </body>
+
 </html>
