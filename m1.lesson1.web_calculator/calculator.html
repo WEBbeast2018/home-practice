@@ -1,10 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 
+<head>
+  <meta charset="UTF-8">
+  <title>My Basic Calculator</title>
+
+  <link rel="stylesheet" type="text/css" href="basicStyle.css">
+  <script src="basicCalc.js" type="text/javascript"></script>
+</head>
+
+<body>
+  <h1>Basic Calculator by Chaim</h1>
+  <div class="disply">
+    <span id="digit">0</span>
+    <span id="operand"> </span>
+  </div>
+  <div class="keys">
+    <form>
+      <button type="button" onclick="getNum(this.value)" value="1">1</button>
+      <button type="button" onclick="getNum(this.value)" value="2">2</button>
+      <button type="button" onclick="getNum(this.value)" value="3">3</button>
+      <button type="button" onclick="calc(this.value)" value="+">+</button>
+      <br>
+      <button type="button" onclick="getNum(this.value)" value="4">4</button>
+      <button type="button" onclick="getNum(this.value)" value="5">5</button>
+      <button type="button" onclick="getNum(this.value)" value="6">6</button>
+      <button type="button" onclick="calc(this.value)" value="-">-</button>
+      <br>
+      <button type="button" onclick="getNum(this.value)" value="7">7</button>
+      <button type="button" onclick="getNum(this.value)" value="8">8</button>
+      <button type="button" onclick="getNum(this.value)" value="9">9</button>
+      <button type="button" onclick="calc(this.value)" value="*">x</button>
+      <br>
+      <button type="button" onclick="clearMe()">C</button>
+      <button type="button" onclick="getNum(this.value)" value="0">0</button>
+      <button type="button" onclick="total(this.value)" value="=">=</button>
+      <button type="button" onclick="calc(this.value)" value="/">/</button>
+    </form>
+  </div>
 </body>
+
 </html>
