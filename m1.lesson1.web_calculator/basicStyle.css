@@ -1,0 +1,62 @@
+@charset "UTF-8";
+
+span {
+  height: 25px;
+  width: 200px;
+  margin: 0;
+  padding: 4px;
+  border: 1px solid black;
+  font-size: 26px;
+  text-align: right;
+  background-color: lightblue; 
+  display: inline-block;     
+}
+
+#operand {
+  height: 25px;
+  width: 25px;
+  margin: 0;
+  padding: 4px;
+  border: 1px solid black;
+  font-size: 26px;
+  text-align: right;
+  background-color: lightblue;   
+  display: inline-block;
+  margin-left: 0x;
+}
+
+.disply {
+  height: 60px;
+  width: 290px;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+      
+.keys button {
+  width: 50px;
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #000;
+  background-color: #4Cff50;
+  border: 1px solid green;
+  border-radius: 12px;
+  box-shadow: 0 9px #999;
+  margin-bottom: 15px;
+}
+      
+button:hover {
+  color: white;
+  background-color: green;
+}
+
+button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
