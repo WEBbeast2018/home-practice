@@ -1,0 +1,14 @@
+article {
+    margin: 20px;
+    text-align: center;
+    padding: 30px;
+    border: 1px red solid;
+}
+.row{
+    display:flex;  
+    align-items: center;  
+}
+
+h1{
+    color: red; 
+}
