@@ -2,9 +2,164 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Card Game</title>
+    <link rel="stylesheet" type="text/css" href="card-game-main-css.css">
 </head>
 <body>
+    <h1>Card Game</h1>
+    <div class ="board">
+
+    </div>
+    <label id="playerScore"></label>
+
+
+    <script>
+
+        class Game{
+
+            constructor(player,numOfTiles)
+            {               
+                this.setBoard(numOfTiles);
+                this.lastTileIndex = -1;
+                this.player = player;
+                this.firstTry=false;
+            }
+
+            setBoard(numOfTiles) {
+                this.tiles = [];
+                this.numbersForTiles = new Array();
+                for(var i=1;i<=numOfTiles/2;i++){
+                     this.numbersForTiles.push(i);
+                     this.numbersForTiles.push(i);
+                }
+
+                for(var i=0;i<numOfTiles;i++){
+                    let randomIndex = Math.floor(Math.random() * this.numbersForTiles.length);
+                    this.tiles.push(new Tile(this.numbersForTiles[randomIndex]));
+                    this.numbersForTiles.splice(randomIndex,1);                 
+                }
+            }
+
+            get numOfTiles() {
+                return this.tiles.length;
+            }
+
+            getMatchStatus(tileIndex)
+            {
+                if (this.tiles[tileIndex].getStatus === "Paired") {
+                    return "AlreadyPaired";
+                }
+
+                if (this.firstTry==false){
+                    this.tiles[tileIndex].setWaiting();
+                    this.lastTileIndex = tileIndex;
+                    this.firstTry =true;
+                    return "Waiting";
+                }
+
+                if ( tileIndex != this.lastTileIndex
+                    && this.tiles[tileIndex].number === this.tiles[this.lastTileIndex].number){
+                    this.player.addScore();
+                    this.firstTry=false;
+                    this.tiles[tileIndex].setPaired();
+                    this.tiles[this.lastTileIndex].setPaired();        
+                    return "Paired";
+                }
+                
+                this.tiles[this.lastTileIndex].setNotActive();
+                this.tiles[tileIndex].setNotActive();
+                this.firstTry=false;
+                return "NotPaired";
+            }
+        }
+
+         class Tile{
+             constructor(number)
+             {
+                 this.number = number;
+                 this.isVisable = false;
+                 this.setNotActive();
+             }
+             get getNumber() {
+                 return this.number;
+             }
+             setWaiting(){
+                this.status ="Waiting";
+             }
+             setPaired(){
+                this.status ="Paired";
+             }
+             setNotActive(){
+                this.status ="NotActive";
+             }
+             get getStatus(){
+                 return this.status;
+             }
+         }
+
+        class Player{
+            constructor()
+            {
+                this.playerScore=0; 
+            }
+            
+            get getPlayerScore() {
+                return this.playerScore;
+            }
+            addScore(){
+                this.playerScore++;
+            }
+        }
+
+
+
+        let player = new Player();
+        let game= new Game(player,16);        
+
+        const fragment = document.createDocumentFragment();
+        const container  = document.getElementsByClassName('board')[0];
+
+        for (rowNumber=0 ;rowNumber<Math.sqrt(game.numOfTiles);rowNumber++){
+            const divElement = document.createElement('Div');
+            divElement.className = "row";
+            for (tileIndex=rowNumber*Math.sqrt(game.numOfTiles) ;tileIndex<(rowNumber+1)*Math.sqrt(game.numOfTiles);tileIndex++){
+                const articleElement = document.createElement('article');
+                articleElement.id = tileIndex;
+                divElement.appendChild(articleElement);                
+            }
+            fragment.appendChild(divElement);
+        }
+        container.appendChild(fragment);        
+
+
+    const articleElements = document.querySelectorAll('article');
+
+    function onTileClicked(event) {
+        let articleElement = event.target;
+        articleElement.innerHTML = game.tiles[articleElement.id].number;
+        if (game.getMatchStatus(articleElement.id)==="NotPaired")
+        {
+            window.setTimeout(setInvisable,1000,articleElement.id,game.lastTileIndex);
+        }
+        setScore();
+
+        
+    }
+    function setInvisable(articleElementid1,articleElementid2)    
+    {
+        document.getElementById(articleElementid1).innerHTML="";
+        document.getElementById(articleElementid2).innerHTML="";
+    }
+
+    articleElements.forEach((articleElement)=>{articleElement.addEventListener('click', onTileClicked)});
+
+
+    function setScore()
+    {
+        var element = document.getElementById('playerScore');
+        element.innerHTML =  "<h2>Score : " + game.player.getPlayerScore + "</h2>";
+    }
+    </script>
 
 </body>
 </html>
