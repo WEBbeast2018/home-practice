@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<head>
+        <style>
+                .button {
+    
+                    background-color: #4CAF50;
+                    width: 200px;
+                    color: black;
+                    padding: 15px 32px;
+                    font-size: 16px;
+                    margin: 4px 2px;
+                    cursor: pointer;
+                    border-radius: 100%;
+                    
+                }
+                </style>
+<center><h1>Calculater</h1></center>
+<center><h2 id="Action"></h2></center>
+<body>
+     <center><input id="FirstNum"  type="number" value=0></center>
+     <center><input id="SecondNum" type="number" value=0></center>
+     <center><INPUT TYPE="text" disabled ID="add" NAME="result" VALUE=""></center>
+     <center><button type="button" class="button" onclick="PlusAction()">+</button>  <button type="button" class="button" onclick="MinusAction()">-</button>  <button type="button" class="button" onclick="DivAction()">/</button></center>
+     <center><button type="button" class="button" onclick="MultiAction()">*</button><button type="button" class ="button" onclick="Clear()">C</button></center> 
+  <script>
+      const CalcAction = {
+          UserAction: "Please Enter 2 numbers to calculate",
+          
+      }
+      document.getElementById("Action").innerHTML = CalcAction.UserAction
+      function PlusAction()
+      {
+        let Num1 = document.getElementById("FirstNum").value
+        let Num2 = document.getElementById("SecondNum").value
+        let third = +Num1 + +Num2;
+        document.getElementById('add').value = third;     
+   
+      }
+      function MinusAction()
+      {
+        let Num1 = document.getElementById("FirstNum").value
+        let Num2 = document.getElementById("SecondNum").value
+        let third = Num1 - Num2;
+        document.getElementById('add').value = third;        
+      }
+      function MultiAction()
+      {
+        let Num1 = document.getElementById("FirstNum").value
+        let Num2 = document.getElementById("SecondNum").value
+        let third = Num1 * Num2;
+        document.getElementById('add').value = third;        
+      }
+      function Clear()
+      {
+           document.getElementById("FirstNum").value =0;
+           document.getElementById("SecondNum").value = 0;  
+           document.getElementById('add').value = "";        
+      
+      } 
+      function DivAction()
+      {
+        let Num1 = document.getElementById("FirstNum").value
+        let Num2 = document.getElementById("SecondNum").value
+        let third = Number(Num2);
+        if( third == 0)
+        {
+          document.getElementById('add').value = "cannot divide by zero";        
+
+        }
+        else
+        {
+            let third = Num1 / Num2;
+            document.getElementById('add').value = third; 
+        }
+        
+        
+               
+      }
+      
+  </script>
+</head>
+</body>
+</html>
