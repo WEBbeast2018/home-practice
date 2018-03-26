@@ -1,0 +1,51 @@
+body{
+    position: fixed;
+    top: 10%;
+    left: 34%;
+    margin-top: -100px;
+    margin-left: -100px;
+    padding-top: 0px;
+  }
+
+  .C_title_P{
+      padding-top: 0px;
+    margin-left: 20px; 
+}
+
+  .C_title{
+margin-left: 20px;
+font-size: 60px;
+  }
+
+.C_score{
+    color:rgb(92, 13, 65);
+    font-size: 25px;
+margin-left: 10px;
+}
+
+.Cbody{
+    width: 100%;
+    height: 100%;
+}
+
+.card_block{
+    display: block;
+    margin: auto;
+}
+
+.S_card{
+background-color: rgb(249, 230, 255);
+    height:150px;
+    width: 150px;
+    margin: 10px;
+    border-width: 6px;
+    border: solid rgb(92, 13, 65) 2px;
+    text-align: center;
+    font-size: 0px;   
+    box-shadow: 3px 5px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.row{
+    display: flex;
+    margin: auto;
+}
