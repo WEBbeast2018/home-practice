@@ -1,10 +1,211 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Ronny's Memory Game!</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <style>
+        button {
+            padding: 15px 25px;
+            font-size: 24px;
+            text-align: center;
+            cursor: pointer;
+            outline: none;
+            color: #fff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 9px #999;
+        }  
+        input {
+            display: inline-block;
+            padding: 8px 5px;
+            border: 1px solid gray;
+            border-radius: 3px;
+            font: normal 16px/normal "Times New Roman";
+            color:teal;
+            background: white;
+        }
+        #header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+        }
+        #GameContainer {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-content: center;
+        
+        }
+        .row {
+            display: block;
+            margin: auto;
+        }
+        .tile {
+            text-align: center;
+            vertical-align: middle;
+            line-height: 50px;
+            user-select: none;
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background-color:goldenrod;
+            border-style: solid;
+            border-color: blue;
+            margin: 2px;
+            padding: 5px;
+            font-size: 0px;
+
+        }
+        .selected {
+            background-color: gray;
+            font-size: 30px;
+			
+        }
+        #answer {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+            height: 150px;
+            background-color: white;
+            text-align: center;
+        }
+        .matched {
+            background-color: white;
+            font-size: 30px;
+			
+        }
+        #rowCol {
+            width: 60px;
+        }
+        button:active {
+          background-color: #3e8e41;
+          box-shadow: 0 5px #666;
+          transform: translateY(4px);
+}
+    </style>
+
 </head>
 <body>
+   <center><div>
+		Select Number Of Tiles (Rows*Columns):
+		<select id='NumOfTiles'>
+				<option value="2">2</option>
+				<option value="4">4</option>
+				<option value="6">6</option>
+        </select>
+        <br></br>
+      <center> <button onclick='StartGame()' id='StartButton'>Start/Restart</button></center> 
+      <br>
+    </br>
+    </div></center>
+    <div id="GameContainer"></div>
+    <div id="answer"></div>
+    <script>
+
+        let shuffle = function (array) {
+			var counter = array.length, temp, index;
+            while (counter > 0) {
+                index = Math.floor(Math.random() * counter);
+                counter--;
+                temp = array[counter];
+                array[counter] = array[index];
+                array[index] = temp;
+            }
+            return array;
+        }
+        function StartGame() {
+            let winner =0;
+            let emoji =["😍", "😃","😕","☹️","😲","😗","😉","😜","😑","😳","😇","😈","😎","😒","🐍","👽","👾","🐙","💣"];
+			document.getElementById('answer').innerHTML="";
+            document.getElementById('answer').style.display = 'flex'
+            let container = document.getElementById('GameContainer');
+            container.innerHTML = '';
+            let numRows = document.getElementById('NumOfTiles').value;
+            document.getElementById('answer').style.width = 99 * numRows
+            let cards = [];
+            for (let i = 0; i < numRows * (numRows / 2); i++) {
+				cards[i] = emoji[i];
+            }
+			const cardsArray = cards.concat(cards);                   
+            const shuffledCards = shuffle(cardsArray);
+            let cardIndex = 0;
+            let divRow, divCard;
+            let selectedCards = 0;
+            let firstCard, secondCard;
+            for (let i = 0; i < numRows; i++) {
+                divRow = document.createElement('div');
+                divRow.className = 'row';
+                for (let j = 0; j < numRows; j++) {
+                    divCard = document.createElement('button');
+                    divCard.className = 'tile';
+                    divCard.id = cardIndex;
+                    divCard.innerHTML = shuffledCards[cardIndex++];
+                    divRow.appendChild(divCard);
+                }
+                container.appendChild(divRow);
+            }
+            let resetCards = function () {
+                selectedCards = 0;
+                firstCard.classList.remove('selected');
+                secondCard.classList.remove('selected');
+                document.getElementById('answer').innerHTML = ''
+            }
+            let CheckMatch = function (card1, card2) {
+                if (card1.innerHTML == card2.innerHTML) {
+                    document.getElementById('answer').innerHTML = "<img src=\"happy.jpg\" width=\"80px\" height=\"100px\">"
+                    card1.classList.remove('selected')
+                    card2.classList.remove('selected')
+                    card1.classList.add('matched');
+                    card2.classList.add('matched');
+                    winner++;
+                    if(winner == (numRows*numRows)/2)
+                    {
+                        document.getElementById('answer').innerHTML = "<img src=\"winner.jpg\" width=\"80px\" height=\"100px\">";
+                    }
+                    return true
+                }
+                else {
+                    document.getElementById('answer').innerHTML = "<img src=\"sad.jpg\" width=\"80px\" height=\"100px\">";
+                    return false
+                }
+            }
+            function SelectCard(id) {
+				element = document.getElementById(id)
+                if (selectedCards == 0) {
+                    firstCard = element
+                    firstCard.classList.add('selected')
+                    selectedCards++;
+                }
+                else if (selectedCards == 1) {
+                    secondCard = element;
+                    if (firstCard == element) {
+                        resetCards();
+                    }
+                    else {
+                        secondCard = element
+                        secondCard.classList.add('selected')
+                        selectedCards++;
+						if (CheckMatch(firstCard, secondCard));
+
+                    }
+                }
+                else {
+					resetCards()
+					
+                }
+            }
+            let cardsDivs = document.querySelectorAll('.tile');
+            cardsDivs.forEach(element => {
+                element.addEventListener('click', function () {
+                    SelectCard(element.id);
+                });
+            });
+        }
+    </script>
 
 </body>
+
 </html>
