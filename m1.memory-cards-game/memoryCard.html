@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>HELLO</title>
+  <link rel="stylesheet" href="memoryCard.css">
+</head>
+<body background="BackroundImages/backImage.jpg">
+    <div id ="title">
+        <label>Choose number of card rows:</label>
+        <input type="number" id ="numOfCards" min = "2" max="6" step="2" onkeydown="return false" >
+        <button id ="btnBuildBoard">Play!</button>
+        <button id ="btnRestart">Restart</button>
+    </div>
+    <div id="timeScore">
+        <label id = "lblScore">Score:</label>
+        <input type="text" id="score">
+        <label id = "lblLevel">Level:</label>
+        <select id = "gameLevel">
+            <option value=3>Easy</option>
+            <option value=2>Normal</option>
+            <option value=1>Hard</option>
+          </select>
+        <label>Time left:</label>
+        <input type="text" id="time">
+    </div>
+    <div id = "Container"></div>
+    <input type="text" id="gameMessage">
+    <script type="text/javascript" src="memoryCard.js"></script>
+</body>
+</html>
