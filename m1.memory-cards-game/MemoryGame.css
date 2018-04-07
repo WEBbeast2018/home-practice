@@ -1,0 +1,54 @@
+ 
+ .close {
+        width: 100px;
+        height: 100px;
+        text-align: center;
+        margin-left: 1%;
+        margin-bottom: 1%;
+        font-weight: bold;
+        font-size: 24px;
+        background-color: black;
+        font-size: 0px;
+      }
+
+ .open {
+ 	width: 100px;
+    height: 100px;
+	transform: rotateY(0);
+	background: #02b3e4;
+	cursor: default;
+	animation-name: flipInY;
+	-webkit-backface-visibility: visible !important;
+	backface-visibility: visible !important;
+	animation-duration: .75s;
+	font-size: 25px;
+}
+
+.disabled {
+	width: 100px;
+    height: 100px;
+	pointer-events: none;
+	opacity: 0.9;
+}
+
+.match{
+	pointer-events: none;
+	width: 100px;
+    height: 100px;
+	cursor: default;
+	background: #E5F720;
+	font-size: 33px;
+	opacity: 0.5;
+	animation-name: rubberBand;
+	-webkit-backface-visibility: visible !important;
+	backface-visibility: visible !important;
+	animation-duration: .75s;
+}
+.unmatch{
+	animation-name: pulse;
+	-webkit-backface-visibility: visible !important;
+	backface-visibility: visible !important;
+	animation-duration: .75s;
+	background: #e2043b;
+
+}
