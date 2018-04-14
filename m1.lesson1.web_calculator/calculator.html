@@ -1,10 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <title>Calculator</title>
 
+    <style>
+        body {
+            background-color: rgb(122, 237, 198, 0.3);
+            background-image: url('http://exchangedownloads.smarttech.com/public/content/23/23632dac-9e95-4bfd-95be-fda964b17ae8/previews/medium/0001.png');
+        }
+
+        #calculator {
+            padding: 0;
+            margin: 0 auto;
+            background-color: bisque;
+
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-around;
+
+            width: 220px;
+            border: 10px solid rgb(255, 152, 0, 0.4);
+            border-radius: 4px;
+            opacity: 50;
+        }
+
+        input[type=text] {
+            width: 220px;
+            height: 40px;
+            font-size: 30px;
+            border-radius: 4px;
+            color: rgb(179, 90, 194);
+            background-color: darkgrey;
+        }
+
+        input[type=button] {
+            color: rgb(179, 90, 194);
+            width: 50px;
+            height: 50px;
+            margin: 1px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="calculator">
+        <form id="ui">
+            <input type="text" id="screen" readonly>
+        </form>
+
+        <div>
+            <input type="button" onclick=foo(this) value="1">
+            <input type="button" onclick=foo(this) value="2">
+            <input type="button" onclick=foo(this) value="3">
+            <input type="button" onclick=foo(this) value="*">
+        </div>
+
+        <div>
+            <input type="button" onclick=foo(this) value="4">
+            <input type="button" onclick=foo(this) value="5">
+            <input type="button" onclick=foo(this) value="6">
+            <input type="button" onclick=foo(this) value="-">
+        </div>
+
+        <div>
+            <input type="button" onclick=foo(this) value="7">
+            <input type="button" onclick=foo(this) value="8">
+            <input type="button" onclick=foo(this) value="9">
+            <input type="button" onclick=foo(this) value="+">
+        </div>
+        <div>
+            <input type="button" onclick=ui.screen.value="" value="c">
+            <input type="button" onclick=foo(this) value="0">
+            <input type="button" onclick=foo(this) value="/">
+            <input type="button" onclick=calc() value="=">
+        </div>
+    </div>
+
+
+    <script>
+        function foo(x) { ui.screen.value += x.value; }
+        function calc() {
+            ui.screen.value = eval(ui.screen.value);
+        }
+    </script>
 </body>
+
 </html>
