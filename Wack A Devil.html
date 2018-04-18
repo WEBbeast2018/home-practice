@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<title>Wack A Devil</title>
+<head>
+  <title>Wack</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<style>
+  body {
+    background-image: url("devil.jpg");
+    text-align: center;
+
+  }
+
+  #score {
+    color: white;
+    margin: 20px;
+    font-size: 50px;
+  }
+
+  #game-board {
+    top: 30vh;
+    width: 190px;
+    height: 190px;
+    margin: auto;
+    border-top: 1px solid #111;
+    border-right: 1px solid #555;
+    border-bottom: 1px solid #555;
+    border-left: 1px solid #111;
+    background-color: #333;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .devil {
+    width: 50px;
+    height: 50px;
+    font-size: 50px;
+    position: absolute;
+    display: none;
+  }
+
+  #devil1 {
+    top: 10px;
+    left: 10px;
+    background-color: #333;
+  }
+
+  #devil2 {
+    top: 10px;
+    left: 70px;
+    background-color: #333;
+  }
+
+  #devil3 {
+    top: 10px;
+    left: 130px;
+    background-color: #333;
+  }
+
+  #devil4 {
+    top: 70px;
+    left: 10px;
+    background-color: #333;
+  }
+
+  #devil5 {
+    top: 70px;
+    left: 70px;
+    background-color: #333;
+  }
+
+  #devil6 {
+    top: 70px;
+    left: 130px;
+    background-color: #333;
+  }
+
+  #devil7 {
+    top: 130px;
+    left: 10px;
+    background-color: #333;
+  }
+
+  #devil8 {
+    top: 130px;
+    left: 70px;
+    background-color: #333;
+  }
+
+  #devil9 {
+    top: 130px;
+    left: 130px;
+    background-color: #333;
+  }
+</style>
+
+<body>
+  <div id='score'>0</div>
+  <button id='hard' onclick="hard()">Speed UP</button>
+  <button id='StartAgin' onclick="again()">Restart</button>
+  <div id='game-board'>
+    <div id='devil1' class='devil'>😈</div>
+    <div id='devil2' class='devil'>😈</div>
+    <div id='devil3' class='devil'>😈</div>
+    <div id='devil4' class='devil'>😈</div>
+    <div id='devil5' class='devil'>😈</div>
+    <div id='devil6' class='devil'>😇</div>
+    <div id='devil7' class='devil'>😈</div>
+    <div id='devil8' class='devil'>😈</div>
+    <div id='devil9' class='devil'>😈</div>
+  </div>
+</body>
+<script>
+  let score = 0;
+  let i;
+
+
+  $(document).ready(function () {
+
+    $(".devil").click(function () {
+      score++;
+      document.getElementById("score").innerHTML = score;
+      $("#devil6").click(function () {
+        score = 0;
+        document.getElementById("score").innerHTML = score;
+
+      });
+    });
+  });
+
+  setInterval(function () {
+    let jump = Math.floor(Math.random() * 9);
+    let devils = document.getElementsByClassName("devil");
+    for (i = 0; i < devils.length; i++) {
+      devils[i].style.display = "none";
+    }
+    devils[jump].style.display = "block";
+
+
+  }, 750);
+
+  function hard() {
+
+    setInterval(function () {
+      let jump = Math.floor(Math.random() * 9);
+      let devils = document.getElementsByClassName("devil");
+      for (i = 0; i < devils.length; i++) {
+        devils[i].style.display = "none";
+      }
+      devils[jump].style.display = "block";
+    }, 375);
+
+
+  }
+  function again() {
+    alert("Final Score " + score);
+    location.reload();
+
+  } 
+</script>
+</html>
