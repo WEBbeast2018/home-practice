@@ -1,0 +1,68 @@
+h1 {
+    text-align: center;
+    width: 95%;
+    font-family: Georgia, serif;
+}
+
+input {
+    width: 50px;
+}
+
+#Menu {
+    margin: 0 auto;
+    width: 520px;
+}
+
+#content{
+    height: 600px;
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+#content:hover {
+    cursor:url(Images/Hammer.cur), pointer;
+}
+
+.row{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 15%;
+    padding: 2px;
+    margin: 10px;
+}
+
+.btn{
+    height: 100%;
+    margin: 5px;
+    background-color: rgba(219,90,51,1);
+    width: 12%;
+    border-radius:5px;
+    box-shadow: 0 3px 0  rgba(219,31,5,1),0 9px 25px rgba(0,0,0,.3);
+}
+
+#lblTime{
+    margin-left: 20px;
+}
+.gameSquers{
+    box-shadow: 0 11px 0  rgba(219,31,5,1),0 9px 25px rgba(0,0,0,.7);
+    position: relative;
+    bottom: 5px;
+}
+
+#restart{
+    margin-left: 30px;
+    background-color: lightblue;
+    border-radius: 5px;
+}
+#lblScore {
+    margin-left: 50px;
+}
+
+
+
+
+
+
