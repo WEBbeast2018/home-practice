@@ -33,23 +33,23 @@
       const CalcAction = {
         UserAction: "Please Enter 2 numbers to calculate",
       }
-      document.getElementById("Action").innerHTML = CalcAction.UserAction
+      document.getElementById("Action").innerHTML = CalcAction.UserAction;
       function PlusAction() {
-        let Num1 = document.getElementById("FirstNum").value
-        let Num2 = document.getElementById("SecondNum").value
+        let Num1 = document.getElementById("FirstNum").value;
+        let Num2 = document.getElementById("SecondNum").value;
         let third = +Num1 + +Num2;
         document.getElementById('add').value = third;
 
       }
       function MinusAction() {
-        let Num1 = document.getElementById("FirstNum").value
-        let Num2 = document.getElementById("SecondNum").value
+        let Num1 = document.getElementById("FirstNum").value;
+        let Num2 = document.getElementById("SecondNum").value;
         let third = Num1 - Num2;
         document.getElementById('add').value = third;
       }
       function MultiAction() {
-        let Num1 = document.getElementById("FirstNum").value
-        let Num2 = document.getElementById("SecondNum").value
+        let Num1 = document.getElementById("FirstNum").value;
+        let Num2 = document.getElementById("SecondNum").value;
         let third = Num1 * Num2;
         document.getElementById('add').value = third;
       }
@@ -60,8 +60,8 @@
 
       }
       function DivAction() {
-        let Num1 = document.getElementById("FirstNum").value
-        let Num2 = document.getElementById("SecondNum").value
+        let Num1 = document.getElementById("FirstNum").value;
+        let Num2 = document.getElementById("SecondNum").value;
         let third = Number(Num2);
         if (third == 0) {
           document.getElementById('add').value = "cannot divide by zero";
