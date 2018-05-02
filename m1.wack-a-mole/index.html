@@ -1,10 +1,173 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <title>Guack-A-Molie</title>
+    <!-- <link rel="stylesheet" type="text/css" href="./style.css"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        .mole {
+            width: 60px;
+            height: 60px;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 80px;
+            text-decoration: none;
+            margin: 2px;
+            border: black solid 1px;
+            display: inline-block;
+            background: url(hole.png) no-repeat;
+            background-color: gray;
+            background-size: 60px;
+            background-position: 0px 19px;
+            z-index: 0;
+            cursor: url('hammer-small.png'), auto;
+        }
 
+        .mole:active {
+            cursor: url('hammer-click.png'), auto;
+        }
+
+        /* .active {
+            background: url(guacka.png) no-repeat;
+            background-color: gray;
+            background-size: 45px;
+            background-position: center;
+        } */
+
+        #GameContainer {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* #GameContainer:mousedown{
+            cursor: url('hammer-click.png'), auto;
+        } */
+
+        #Score {
+            background: #50a8ff;
+            margin-top: 10px;
+            width: 400px;
+            height: 30px;
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+            vertical-align: middle;
+            line-height: 30px;
+            font-weight: bold;
+        }
+
+        #Footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .avoImg {
+            text-decoration: none;
+            position: relative;
+            top: 50px;
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div id='GameContainer'></div>
+    <div id='Footer'>
+        <div id='Score'>Score: 0</div>
+    </div>
 </body>
+<script>
+    const avocadoDiv = document.createElement('div');
+    avocadoDiv.className = 'avoDiv';
+    const avocado = document.createElement('img');
+    avocado.src = 'guacka.png';
+    avocado.className = 'avoImg'
+    avocado.height = 50;
+    avocadoDiv.appendChild(avocado);
+    let score = 0;
+    const container = document.getElementById('GameContainer');
+    const numRows = 6;
+    for (let i = 0; i < numRows; i++) {
+        divRow = document.createElement('div');
+        divRow.className = 'row';
+        for (let j = 0; j < numRows; j++) {
+            divMole = document.createElement('div');
+            divMole.className = 'mole';
+            divRow.appendChild(divMole);
+        }
+        container.appendChild(divRow);
+    }
+
+    function get4Randoms(array) {
+        let newArr = [];
+        while (newArr.length < 4) {
+            let random = array[Math.floor(Math.random() * array.length)];
+            if (newArr.indexOf(random) == -1) {
+                newArr.push(random);
+            }
+        }
+        return newArr
+    }
+
+    function clearMolies(moles) {
+        if (moles.length) {
+            moles.forEach(el => {
+                $(el.children[0]).animate({
+                    'top': '50px'
+                }, 200);
+                setTimeout(function () {
+                    el.removeChild(el.children[0]);
+                }, 80)
+            })
+        }
+        else {
+            $(moles.children[0]).animate({
+                'top': '50px'
+            }, 100);
+            setTimeout(function () {
+                moles.removeChild(moles.children[0]);
+            }, 50)
+        }
+
+        // $(moles).removeClass("active")
+
+        $(moles).unbind("click");
+    }
+
+    function Round() {
+        let moles = get4Randoms(allMole);
+        // $(moles).addClass("active");
+        moles.forEach(el => {
+            el.appendChild(avocado.cloneNode());
+        });
+        $(".avoImg").animate({
+            'top': '0px'
+        }, 200);
+        setTimeout(function () {
+            clearMolies(moles)
+        }, 2000);
+
+        $(moles).click(function () {
+            $(this).animate({
+                'cursor': 'url("hammer-click.png"), auto'
+            }, 500);
+            const i = moles.indexOf(this);
+            moles.splice(i, 1);
+            clearMolies(this);
+            score++;
+            $("#Score").text("Score: " + score);
+        })
+    }
+
+    const allMole = document.querySelectorAll('.mole');
+    // Round();
+    setInterval(function () { Round() }, 2100);
+
+</script>
+
 </html>
